@@ -19,3 +19,22 @@ const App = () => {
 }
 
 export default App
+
+
+{/* 
+const App = () => {
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Hero />} /> 
+        <Route path="/category" element={<Category />} /> 
+        <Route path="/about" element={<About />} /> 
+        <Route path="*" element={<Notfoundpage />} /> 
+      </Routes>
+      <Footer />
+    </Router>
+  );
+};
+*/}
+
