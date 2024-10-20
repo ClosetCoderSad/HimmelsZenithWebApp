@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import heroimg1 from "../assets/img1.png";
 import heroimg2 from "../assets/img2.png";
 import heroimg3 from "../assets/img3.png";
 import heartUnfilled from "../assets/love 5.svg"; // Unfilled heart
 import heartFilled from "../assets/heart.png"; // Filled red heart
 import FadeInWrapper from "../animations/fadeInWrapper";
+import { LovedItemsContext } from "../components/LovedItemsContext"; // Import context
 
 const Hero = () => {
+  const { toggleLove } = useContext(LovedItemsContext); // Use the context to access the toggle function
+
   // Separate states to track whether each heart is "loved"
   const [isLoved1, setIsLoved1] = useState(false); // First heart
   const [isLoved2, setIsLoved2] = useState(false); // Second heart
   const [isLoved3, setIsLoved3] = useState(false); // Third heart
+
+  const handleToggleLove = (productNumber, isCurrentlyLoved) => {
+    const toggleFunctions = [
+      { state: isLoved1, setState: setIsLoved1 },
+      { state: isLoved2, setState: setIsLoved2 },
+      { state: isLoved3, setState: setIsLoved3 },
+    ];
+
+    const { setState } = toggleFunctions[productNumber];
+    setState(!isCurrentlyLoved);
+    toggleLove(!isCurrentlyLoved); // Call the global toggle function
+  };
 
   return (
     <FadeInWrapper>
@@ -30,7 +45,7 @@ const Hero = () => {
               <img
                 src={isLoved1 ? heartFilled : heartUnfilled} // Toggle between unfilled and filled heart
                 className="h-[25px] w-[25px] md:h-[29px] md:w-[29px] lg:h-[30px] lg:w-[30px] xl:h-[34px] xl:w-[34px] absolute md:top-3 md:right-3 top-1.5 right-1.5"
-                onClick={() => setIsLoved1(!isLoved1)} // Toggle for first heart
+                onClick={() => handleToggleLove(0, isLoved1)}
               />
             </div>
             <div className="xl:w-[350px] lg:w-[270px] md:w-[206px] w-[160px] flex justify-between font-bebas pt-3 md:text-[18px] text-[15px]">
@@ -48,7 +63,7 @@ const Hero = () => {
               <img
                 src={isLoved2 ? heartFilled : heartUnfilled} // Toggle between unfilled and filled heart
                 className="h-[25px] w-[25px] md:h-[29px] md:w-[29px] lg:h-[30px] lg:w-[30px] xl:h-[34px] xl:w-[34px] absolute md:top-3 md:right-3 top-1.5 right-1.5"
-                onClick={() => setIsLoved2(!isLoved2)} // Toggle for second heart
+                onClick={() => handleToggleLove(1, isLoved2)}
               />
             </div>
             <div className="xl:w-[350px] lg:w-[270px] md:w-[206px] w-[160px] flex justify-between font-bebas pt-3 md:text-[18px] text-[15px]">
@@ -66,7 +81,7 @@ const Hero = () => {
               <img
                 src={isLoved3 ? heartFilled : heartUnfilled} // Toggle between unfilled and filled heart
                 className="h-[25px] w-[25px] md:h-[29px] md:w-[29px] lg:h-[30px] lg:w-[30px] xl:h-[34px] xl:w-[34px] absolute md:top-3 md:right-3 top-1.5 right-1.5"
-                onClick={() => setIsLoved3(!isLoved3)} // Toggle for third heart
+                onClick={() => handleToggleLove(2, isLoved3)}
               />
             </div>
             <div className="xl:w-[350px] lg:w-[270px] md:w-[206px] w-[160px] flex justify-between font-bebas pt-3 md:text-[18px] text-[15px]">

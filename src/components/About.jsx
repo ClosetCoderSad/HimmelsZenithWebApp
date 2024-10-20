@@ -22,7 +22,7 @@ const About = () => {
             To know latest trend sets follow Instagram
           </p>
         </div>
-        <div className="flex flex-row w-full relative bg-customDarkRed gap-[1px]">
+        <div className="flex flex-row w-full relative bg-customDarkRed">
           <img src={aboutImg1} className="w-1/3 opacity-85" />
           <video className="w-1/3 opacity-85" autoPlay muted={isMuted} loop playsInline onClick={handleVideoClick}>
             <source src={videofile} type="video/mp4"/>
